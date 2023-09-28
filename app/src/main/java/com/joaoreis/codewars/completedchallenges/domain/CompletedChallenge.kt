@@ -1,4 +1,4 @@
-package com.joaoreis.codewars.completedchallenges
+package com.joaoreis.codewars.completedchallenges.domain
 
 import kotlinx.datetime.Instant
 

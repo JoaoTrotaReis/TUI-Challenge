@@ -1,7 +1,7 @@
 package com.joaoreis.codewars
 
 import app.cash.turbine.test
-import com.joaoreis.codewars.completedchallenges.*
+import com.joaoreis.codewars.completedchallenges.domain.*
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk

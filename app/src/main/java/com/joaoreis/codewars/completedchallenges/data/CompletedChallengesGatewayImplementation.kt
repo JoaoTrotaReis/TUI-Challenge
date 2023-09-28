@@ -1,9 +1,9 @@
 package com.joaoreis.codewars.completedchallenges.data
 
 import com.joaoreis.codewars.Result
-import com.joaoreis.codewars.completedchallenges.CompletedChallenge
-import com.joaoreis.codewars.completedchallenges.CompletedChallenges
-import com.joaoreis.codewars.completedchallenges.CompletedChallengesGateway
+import com.joaoreis.codewars.completedchallenges.domain.CompletedChallenge
+import com.joaoreis.codewars.completedchallenges.domain.CompletedChallenges
+import com.joaoreis.codewars.completedchallenges.domain.CompletedChallengesGateway
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 

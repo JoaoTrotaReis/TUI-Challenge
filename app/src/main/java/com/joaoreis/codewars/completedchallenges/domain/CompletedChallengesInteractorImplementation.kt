@@ -1,8 +1,7 @@
-package com.joaoreis.codewars.completedchallenges
+package com.joaoreis.codewars.completedchallenges.domain
 
 import com.joaoreis.codewars.Result
 import com.joaoreis.codewars.State
-import com.joaoreis.codewars.completedchallenges.data.UserGatewayImplementation
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

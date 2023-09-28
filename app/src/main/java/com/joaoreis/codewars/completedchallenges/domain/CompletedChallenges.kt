@@ -1,4 +1,4 @@
-package com.joaoreis.codewars.completedchallenges
+package com.joaoreis.codewars.completedchallenges.domain
 
 data class CompletedChallenges(
     val currentPage: Int,
