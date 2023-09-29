@@ -1,4 +1,4 @@
-package com.joaoreis.codewars.challengedetails
+package com.joaoreis.codewars.challengedetails.domain
 
 import com.joaoreis.codewars.Result
 import com.joaoreis.codewars.State

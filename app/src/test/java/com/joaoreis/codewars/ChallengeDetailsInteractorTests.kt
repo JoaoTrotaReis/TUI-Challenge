@@ -1,9 +1,9 @@
 package com.joaoreis.codewars
 
 import app.cash.turbine.test
-import com.joaoreis.codewars.challengedetails.ChallengeDetails
-import com.joaoreis.codewars.challengedetails.ChallengeDetailsGateway
-import com.joaoreis.codewars.challengedetails.ChallengeDetailsInteractorImplementation
+import com.joaoreis.codewars.challengedetails.domain.ChallengeDetails
+import com.joaoreis.codewars.challengedetails.domain.ChallengeDetailsGateway
+import com.joaoreis.codewars.challengedetails.domain.ChallengeDetailsInteractorImplementation
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.test.StandardTestDispatcher

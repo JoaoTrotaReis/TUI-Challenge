@@ -1,4 +1,4 @@
-package com.joaoreis.codewars.completedchallenges
+package com.joaoreis.codewars.completedchallenges.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,7 +20,9 @@ class CompletedChallengesViewModel @Inject constructor(
     private val completedChallengesInteractor: CompletedChallengesInteractor
 ): ViewModel() {
 
-    private val _viewState = MutableStateFlow<CompletedChallengesViewState>(CompletedChallengesViewState.Loading)
+    private val _viewState = MutableStateFlow<CompletedChallengesViewState>(
+        CompletedChallengesViewState.Loading
+    )
     val viewState: StateFlow<CompletedChallengesViewState> = _viewState
 
     init {

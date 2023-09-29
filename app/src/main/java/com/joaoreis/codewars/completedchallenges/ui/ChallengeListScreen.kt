@@ -8,8 +8,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.joaoreis.codewars.completedchallenges.CompletedChallengesViewModel
-import com.joaoreis.codewars.completedchallenges.CompletedChallengesViewState
+import com.joaoreis.codewars.completedchallenges.presentation.CompletedChallengesViewModel
+import com.joaoreis.codewars.completedchallenges.presentation.CompletedChallengesViewState
 
 @Composable
 fun ChallengeListScreen(viewModel: CompletedChallengesViewModel) {

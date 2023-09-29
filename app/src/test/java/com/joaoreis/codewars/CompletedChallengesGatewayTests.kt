@@ -1,8 +1,8 @@
 package com.joaoreis.codewars
 
+import com.joaoreis.codewars.api.CodewarsAPI
 import com.joaoreis.codewars.completedchallenges.domain.CompletedChallenge
 import com.joaoreis.codewars.completedchallenges.domain.CompletedChallenges
-import com.joaoreis.codewars.completedchallenges.data.CodewarsAPI
 import com.joaoreis.codewars.completedchallenges.data.CompletedChallengeDTO
 import com.joaoreis.codewars.completedchallenges.data.CompletedChallengesGatewayImplementation
 import com.joaoreis.codewars.completedchallenges.data.CompletedChallengesListDTO

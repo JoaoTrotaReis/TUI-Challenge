@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DomainModule {
+object CompletedChallengesDomainModule {
     @Provides
     fun provideCompletedChallengesInteractor(
         challengesGateway: CompletedChallengesGateway,

@@ -1,9 +1,9 @@
 package com.joaoreis.codewars
 
 import app.cash.turbine.test
-import com.joaoreis.codewars.completedchallenges.CompletedChallengeUIModel
-import com.joaoreis.codewars.completedchallenges.CompletedChallengesViewModel
-import com.joaoreis.codewars.completedchallenges.CompletedChallengesViewState
+import com.joaoreis.codewars.completedchallenges.presentation.CompletedChallengeUIModel
+import com.joaoreis.codewars.completedchallenges.presentation.CompletedChallengesViewModel
+import com.joaoreis.codewars.completedchallenges.presentation.CompletedChallengesViewState
 import com.joaoreis.codewars.completedchallenges.domain.CompletedChallenge
 import com.joaoreis.codewars.completedchallenges.domain.CompletedChallenges
 import com.joaoreis.codewars.completedchallenges.domain.CompletedChallengesInteractor

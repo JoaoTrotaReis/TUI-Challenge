@@ -1,5 +1,6 @@
 package com.joaoreis.codewars.completedchallenges.data
 
+import com.joaoreis.codewars.api.CodewarsAPI
 import com.joaoreis.codewars.Result
 import com.joaoreis.codewars.completedchallenges.domain.CompletedChallenge
 import com.joaoreis.codewars.completedchallenges.domain.CompletedChallenges

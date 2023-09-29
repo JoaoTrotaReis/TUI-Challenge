@@ -1,4 +1,4 @@
-package com.joaoreis.codewars.challengedetails
+package com.joaoreis.codewars.challengedetails.domain
 
 data class ChallengeDetails(
     val name: String,
