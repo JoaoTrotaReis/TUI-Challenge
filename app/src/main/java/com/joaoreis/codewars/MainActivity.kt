@@ -33,8 +33,7 @@ class MainActivity : ComponentActivity() {
                             Text(
                                 text = "Codewars"
                             )
-                        },
-                        backgroundColor = Color.White
+                        }
                     )
                 }, backgroundColor = Color.Transparent) { padding ->
                     Box(
@@ -48,9 +47,4 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
 }
