@@ -19,7 +19,7 @@ import com.joaoreis.codewars.challengedetails.presentation.ChallengeDetailsUIMod
 fun ChallengeDetailsComponent(challengeDetails: ChallengeDetailsUIModel) {
     Column(
         Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .padding(16.dp)
             .background(Color.White)
             .verticalScroll(rememberScrollState())
@@ -29,7 +29,7 @@ fun ChallengeDetailsComponent(challengeDetails: ChallengeDetailsUIModel) {
             fontWeight = FontWeight.Bold)
         Spacer(modifier = Modifier.padding(8.dp))
         Text(text = challengeDetails.description)
-        Spacer(modifier = Modifier.padding(8.dp))
+        Spacer(modifier = Modifier.padding(16.dp))
         Text(text = challengeDetails.languages.joinToString(", "))
         Spacer(modifier = Modifier.padding(8.dp))
         Text(text = challengeDetails.tags.joinToString(", "))

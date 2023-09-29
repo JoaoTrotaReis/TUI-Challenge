@@ -22,36 +22,11 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             CodewarsTheme {
-                val navController = rememberNavController()
-
-                Scaffold(topBar = {
-                    TopAppBar(
-                        title = {
-                            Text(
-                                text = "Codewars"
-                            )
-                        }
-                    )
-                }, backgroundColor = Color.Transparent) { padding ->
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(padding),
-                    ) {
-                        NavHost(navController = navController, startDestination = "completed_challenges") {
-                            composable("completed_challenges") { ChallengeListScreen(navController = navController) }
-                            composable("challenge/{challengeId}",
-                                arguments = listOf(navArgument("challengeId") { type = NavType.StringType })) { backStackEntry ->
-                                ChallengeDetailsScreen(challengeId = backStackEntry.arguments?.getString("challengeId")!!)
-                            }
-                        }
-                    }
-                }
+                MainScreen()
             }
         }
     }

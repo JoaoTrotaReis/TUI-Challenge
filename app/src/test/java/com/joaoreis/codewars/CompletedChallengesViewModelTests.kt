@@ -37,7 +37,7 @@ class CompletedChallengesViewModelTests {
 
     @Test
     fun `When completed challenges are loading Then emit a loading view state`() = runTest {
-        val interactor = mockk<CompletedChallengesInteractor>().also {
+        val interactor = mockk<CompletedChallengesInteractor>(relaxed = true).also {
             coEvery { it.state } returns MutableStateFlow(State.Loading())
         }
 
@@ -52,7 +52,7 @@ class CompletedChallengesViewModelTests {
 
     @Test
     fun `When there is an error getting completed challenges Then emit an error view state`() = runTest {
-        val interactor = mockk<CompletedChallengesInteractor>().also {
+        val interactor = mockk<CompletedChallengesInteractor>(relaxed = true).also {
             coEvery { it.state } returns MutableStateFlow(State.Error())
         }
 
@@ -91,7 +91,7 @@ class CompletedChallengesViewModelTests {
             )
         )
 
-        val interactor = mockk<CompletedChallengesInteractor>().also {
+        val interactor = mockk<CompletedChallengesInteractor>(relaxed = true).also {
             coEvery { it.state } returns MutableStateFlow(State.Loaded(challenges))
         }
 
