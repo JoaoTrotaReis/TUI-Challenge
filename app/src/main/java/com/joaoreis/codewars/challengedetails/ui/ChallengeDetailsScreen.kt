@@ -8,13 +8,17 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.joaoreis.codewars.challengedetails.presentation.ChallengeDetailsViewModel
 import com.joaoreis.codewars.challengedetails.presentation.ChallengeDetailsViewState
 
 @Composable
-fun ChallengeDetailsScreen(viewModel: ChallengeDetailsViewModel = hiltViewModel(), challengeId: String) {
+fun ChallengeDetailsScreen(
+    viewModel: ChallengeDetailsViewModel = hiltViewModel(),
+    challengeId: String
+) {
     val state = viewModel.viewState.collectAsState().value
 
     LaunchedEffect(Unit) {
@@ -22,9 +26,11 @@ fun ChallengeDetailsScreen(viewModel: ChallengeDetailsViewModel = hiltViewModel(
     }
 
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .testTag("ChallengeDetails")
     ) {
-        when(state) {
+        when (state) {
             is ChallengeDetailsViewState.ChallengeDetailsLoaded -> {
                 ChallengeDetailsComponent(challengeDetails = state.challenge)
             }
@@ -33,7 +39,8 @@ fun ChallengeDetailsScreen(viewModel: ChallengeDetailsViewModel = hiltViewModel(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(),
+                        .fillMaxHeight()
+                        .testTag("ChallengeDetailsError"),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -45,7 +52,8 @@ fun ChallengeDetailsScreen(viewModel: ChallengeDetailsViewModel = hiltViewModel(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(),
+                        .fillMaxHeight()
+                        .testTag("ChallengeDetailsLoading"),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {

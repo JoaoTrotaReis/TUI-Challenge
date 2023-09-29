@@ -83,6 +83,7 @@ class CompletedChallengesViewModelTests {
         val expectedResult = CompletedChallengesViewState.ChallengesLoaded(
             challenges = listOf(
                 CompletedChallengeUIModel(
+                    id = "id",
                     name = "name",
                     completedAt = "28/09/2023",
                     languages = listOf("kotlin")

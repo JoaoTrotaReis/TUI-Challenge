@@ -18,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CompletedChallengesViewModel @Inject constructor(
     private val completedChallengesInteractor: CompletedChallengesInteractor
-): ViewModel() {
+) : ViewModel() {
 
     private val _viewState = MutableStateFlow<CompletedChallengesViewState>(
         CompletedChallengesViewState.Loading
@@ -26,27 +26,29 @@ class CompletedChallengesViewModel @Inject constructor(
     val viewState: StateFlow<CompletedChallengesViewState> = _viewState
 
     init {
-       viewModelScope.launch {
-           completedChallengesInteractor.state.collect {
-               when(it) {
-                   is State.Error -> _viewState.emit(CompletedChallengesViewState.Error)
-                   is State.Idle -> {}
-                   is State.Loaded -> {
-                       _viewState.emit(CompletedChallengesViewState.ChallengesLoaded(
-                           it.data.challenges.map { challenge ->
-                               CompletedChallengeUIModel(
-                                   id = challenge.id,
-                                   name = challenge.name,
-                                   completedAt = formatDate(challenge.completedAt),
-                                   languages = challenge.languages
-                               )
-                           }
-                       ))
-                   }
-                   is State.Loading -> _viewState.emit(CompletedChallengesViewState.Loading)
-               }
-           }
-       }
+        viewModelScope.launch {
+            completedChallengesInteractor.state.collect {
+                when (it) {
+                    is State.Error -> _viewState.emit(CompletedChallengesViewState.Error)
+                    is State.Idle -> {}
+                    is State.Loaded -> {
+                        _viewState.emit(CompletedChallengesViewState.ChallengesLoaded(
+                            it.data.challenges.map { challenge ->
+                                CompletedChallengeUIModel(
+                                    id = challenge.id,
+                                    name = challenge.name,
+                                    completedAt = formatDate(challenge.completedAt),
+                                    languages = challenge.languages
+                                )
+                            }
+                        ))
+                    }
+                    is State.Loading -> _viewState.emit(CompletedChallengesViewState.Loading)
+                }
+            }
+        }
+
+        loadCompletedChallenges()
     }
 
     fun loadCompletedChallenges() {

@@ -8,6 +8,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.joaoreis.codewars.completedchallenges.presentation.CompletedChallengesViewModel
@@ -16,10 +17,6 @@ import com.joaoreis.codewars.completedchallenges.presentation.CompletedChallenge
 @Composable
 fun ChallengeListScreen(viewModel: CompletedChallengesViewModel = hiltViewModel(), navController: NavController) {
     val state = viewModel.viewState.collectAsState().value
-
-    LaunchedEffect(Unit) {
-        viewModel.loadCompletedChallenges()
-    }
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -33,7 +30,8 @@ fun ChallengeListScreen(viewModel: CompletedChallengesViewModel = hiltViewModel(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(),
+                        .fillMaxHeight()
+                        .testTag("ErrorMessage"),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -44,7 +42,8 @@ fun ChallengeListScreen(viewModel: CompletedChallengesViewModel = hiltViewModel(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(),
+                        .fillMaxHeight()
+                        .testTag("LoadingSpinner"),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
