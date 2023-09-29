@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joaoreis.codewars.State
 import com.joaoreis.codewars.completedchallenges.domain.CompletedChallengesInteractor
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -12,8 +13,10 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toJavaLocalDateTime
 import kotlinx.datetime.toLocalDateTime
 import java.time.format.DateTimeFormatter
+import javax.inject.Inject
 
-class CompletedChallengesViewModel(
+@HiltViewModel
+class CompletedChallengesViewModel @Inject constructor(
     private val completedChallengesInteractor: CompletedChallengesInteractor
 ): ViewModel() {
 
