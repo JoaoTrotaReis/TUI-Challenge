@@ -1,4 +1,4 @@
-package com.joaoreis.codewars.completedchallenges.ui
+package com.joaoreis.codewars.challengedetails.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
@@ -8,28 +8,28 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
-import com.joaoreis.codewars.completedchallenges.presentation.CompletedChallengesViewModel
-import com.joaoreis.codewars.completedchallenges.presentation.CompletedChallengesViewState
+import com.joaoreis.codewars.challengedetails.presentation.ChallengeDetailsViewModel
+import com.joaoreis.codewars.challengedetails.presentation.ChallengeDetailsViewState
 
 @Composable
-fun ChallengeListScreen(viewModel: CompletedChallengesViewModel = hiltViewModel(), navController: NavController) {
+fun ChallengeDetailsScreen(viewModel: ChallengeDetailsViewModel = hiltViewModel(), challengeId: String) {
     val state = viewModel.viewState.collectAsState().value
 
     LaunchedEffect(Unit) {
-        viewModel.loadCompletedChallenges()
+        viewModel.loadChallengeDetails(challengeId)
     }
 
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
         when(state) {
-            is CompletedChallengesViewState.ChallengesLoaded -> {
-                ChallengeList(items = state.challenges,
-                onClickAction = { id -> navController.navigate("challenge/${id}")})
+            is ChallengeDetailsViewState.ChallengeDetailsLoaded -> {
+                ChallengeDetailsComponent(challengeDetails = state.challenge)
             }
-            CompletedChallengesViewState.Error -> {
+
+            ChallengeDetailsViewState.Error -> {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -40,7 +40,8 @@ fun ChallengeListScreen(viewModel: CompletedChallengesViewModel = hiltViewModel(
                     Text("There was an error loading the data")
                 }
             }
-            CompletedChallengesViewState.Loading -> {
+
+            ChallengeDetailsViewState.Loading -> {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -53,4 +54,10 @@ fun ChallengeListScreen(viewModel: CompletedChallengesViewModel = hiltViewModel(
             }
         }
     }
+}
+
+@Composable
+@Preview
+fun ChallengeDetailsScreen_Preview() {
+
 }

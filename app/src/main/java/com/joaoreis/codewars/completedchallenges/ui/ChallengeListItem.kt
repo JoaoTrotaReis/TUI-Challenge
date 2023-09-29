@@ -1,5 +1,6 @@
 package com.joaoreis.codewars.completedchallenges.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,15 +15,22 @@ import androidx.compose.ui.unit.dp
 import com.joaoreis.codewars.ui.theme.CodewarsTheme
 
 @Composable
-fun ChallengeListItem(name: String, completedAt: String, languages: List<String>) {
+fun ChallengeListItem(
+    modifier: Modifier = Modifier,
+    name: String,
+    completedAt: String,
+    languages: List<String>
+) {
     Surface(elevation = 3.dp) {
         Column(
-            Modifier
+            modifier
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            Text(text = name,
-                fontWeight = FontWeight.Bold)
+            Text(
+                text = name,
+                fontWeight = FontWeight.Bold
+            )
             Text(text = languages.joinToString(", "))
             Spacer(modifier = Modifier.padding(8.dp))
             Text(text = completedAt)
@@ -34,6 +42,10 @@ fun ChallengeListItem(name: String, completedAt: String, languages: List<String>
 @Composable
 fun DefaultPreview() {
     CodewarsTheme {
-        ChallengeListItem(name = "Name of the challenge", completedAt = "22/09/2023", languages = listOf("kotlin, java, javascript"))
+        ChallengeListItem(
+            name = "Name of the challenge",
+            completedAt = "22/09/2023",
+            languages = listOf("kotlin, java, javascript")
+        )
     }
 }

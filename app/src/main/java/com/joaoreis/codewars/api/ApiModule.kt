@@ -26,7 +26,7 @@ object ApiModule {
     @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .addConverterFactory(Json.asConverterFactory(MediaType.parse("application/json")!!))
+        .addConverterFactory(Json { ignoreUnknownKeys = true }.asConverterFactory(MediaType.parse("application/json")!!))
         .baseUrl(BASE_URL)
         .client(okHttpClient)
         .build()

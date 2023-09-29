@@ -35,6 +35,7 @@ class CompletedChallengesViewModel @Inject constructor(
                        _viewState.emit(CompletedChallengesViewState.ChallengesLoaded(
                            it.data.challenges.map { challenge ->
                                CompletedChallengeUIModel(
+                                   id = challenge.id,
                                    name = challenge.name,
                                    completedAt = formatDate(challenge.completedAt),
                                    languages = challenge.languages

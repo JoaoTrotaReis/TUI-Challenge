@@ -1,6 +1,7 @@
 package com.joaoreis.codewars.completedchallenges.presentation
 
 data class CompletedChallengeUIModel(
+    val id: String,
     val name: String,
     val completedAt: String,
     val languages: List<String>
