@@ -26,6 +26,4 @@ The component tests were implemented later to validate the acceptance criteria o
 # Decisions Made
 
 - The UI is very basic, since I suck at coming up with good designs :sweat_smile: and because I chose to focus on architecture and tests.
-- I noticed the API has pagination, but for the sake of brevity I chose not to implement it. We can discuss how I would implement it in the interview! 
 - I did not deal with screen rotation, since it wasn't asked and I didn't want to spend time on it. It could be implemented with `SavedStateHandle` in `ViewModel` and we can discuss it in the interview.
-- The gradle files could be better organized: it could be gradle kotlin script instead of groovy and dependencies and versions could be better organized as well. I chose not to take time to deal with this.
