@@ -58,31 +58,34 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.activity:activity-compose:1.3.1'
-    implementation "androidx.compose.ui:ui:$compose_ui_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
-    implementation 'androidx.compose.material:material:1.1.1'
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-datetime:0.4.1'
-    implementation 'com.google.dagger:hilt-android:2.44'
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0'
-    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
-    implementation "androidx.navigation:navigation-compose:2.6.0"
-    implementation "com.squareup.okhttp3:okhttp:4.11.0"
-    kapt 'com.google.dagger:hilt-compiler:2.44'
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation "io.mockk:mockk-android:1.13.5"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2"
-    testImplementation 'app.cash.turbine:turbine:1.0.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.38.1'
-    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.38.1'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
-    androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.11.0"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
+    implementation "androidx.core:core-ktx:$coreKtxVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+    implementation "androidx.activity:activity-compose:$activityComposeVersion"
+    implementation "androidx.compose.ui:ui:$composeUiVersion"
+    implementation "androidx.compose.ui:ui-tooling-preview:$composeUiVersion"
+    implementation "androidx.compose.material:material:$composeMaterialVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:$kotlinSerializationConverterVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-datetime:$kotlinDateTimeVersion"
+    implementation "com.google.dagger:hilt-android:$hiltVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinSerializationJsonVersion"
+    implementation "androidx.hilt:hilt-navigation-compose:$hiltComposeNavigationVersion"
+    implementation "androidx.navigation:navigation-compose:$composeNavigationVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    kapt "com.google.dagger:hilt-compiler:$hiltVersion"
+
+    testImplementation "junit:junit:$jUnitVersion"
+    testImplementation "io.mockk:mockk-android:$mockkVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVersion"
+    testImplementation "app.cash.turbine:turbine:$turbineVersion"
+
+    androidTestImplementation "androidx.test.ext:junit:$jUnitExtVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$composeUiVersion"
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$hiltTestingVerstion"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hiltTestingVerstion"
+
+    debugImplementation "androidx.compose.ui:ui-tooling:$composeUiVersion"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$composeUiVersion"
 }
