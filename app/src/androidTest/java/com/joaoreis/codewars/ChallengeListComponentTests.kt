@@ -124,4 +124,137 @@ class ChallengeListComponentTests {
 
         mockWebServer.shutdown()
     }
+
+    @Test
+    fun shouldShowLoadMoreLoadingIndicatorWhenThereIsANextPageAndListIsScrolledToBottom() {
+        val mockWebServer = MockWebServer()
+        mockWebServer.start(8080)
+        mockWebServer.enqueue(MockResponse().setBody(TestData.COMPLETED_CHALLENGES_WITH_NEXT_PAGE))
+        mockWebServer.enqueue(MockResponse().setBodyDelay(5, TimeUnit.SECONDS).setBody(TestData.COMPLETED_CHALLENGES_WITH_NEXT_PAGE))
+
+        baseUrl = mockWebServer.url("/").toString()
+        hiltRule.inject()
+
+        launch(MainActivity::class.java)
+
+        composeTestRule.mainClock.autoAdvance = true
+        composeTestRule.waitForIdle()
+
+
+
+        composeTestRule.onNodeWithTag("ChallengesList")
+            .performScrollToIndex(5)
+            .performScrollToIndex(9)
+            .performScrollToIndex(14)
+
+        composeTestRule.waitForIdle()
+
+        composeTestRule.onNodeWithTag("ChallengesList")
+            .onChildren()
+            .assertAny(hasTestTag("LoadMoreItem"))
+            .onFirst().assertExists()
+
+        mockWebServer.shutdown()
+    }
+
+    @Test
+    fun shouldShowLoadMoreErrorWhenThereIsANextPageAndListIsScrolledToBottomAndNextPageFailsToLoad() {
+        val mockWebServer = MockWebServer()
+        mockWebServer.start(8080)
+        mockWebServer.enqueue(MockResponse().setBody(TestData.COMPLETED_CHALLENGES_WITH_NEXT_PAGE))
+        mockWebServer.enqueue(MockResponse().setResponseCode(404))
+
+        baseUrl = mockWebServer.url("/").toString()
+        hiltRule.inject()
+
+        launch(MainActivity::class.java)
+
+        composeTestRule.mainClock.autoAdvance = true
+        composeTestRule.waitForIdle()
+
+
+
+        composeTestRule.onNodeWithTag("ChallengesList")
+            .performScrollToIndex(5)
+            .performScrollToIndex(9)
+            .performScrollToIndex(14)
+
+        composeTestRule.waitForIdle()
+
+        composeTestRule.onNodeWithTag("ChallengesList")
+            .onChildren()
+            .assertAny(hasTestTag("LoadMoreErrorItem"))
+            .onFirst().assertExists()
+
+        mockWebServer.shutdown()
+    }
+
+    @Test
+    fun shouldShowNextPageWhenThereIsANextPageAndListIsScrolledToBottom() {
+        val mockWebServer = MockWebServer()
+        mockWebServer.start(8080)
+        mockWebServer.enqueue(MockResponse().setBody(TestData.COMPLETED_CHALLENGES_WITH_NEXT_PAGE))
+        mockWebServer.enqueue(MockResponse().setBody(TestData.COMPLETED_CHALLENGES_PAGE_2))
+
+        baseUrl = mockWebServer.url("/").toString()
+        hiltRule.inject()
+
+        launch(MainActivity::class.java)
+
+        composeTestRule.mainClock.autoAdvance = true
+        composeTestRule.waitForIdle()
+
+        composeTestRule.onNodeWithTag("ChallengesList")
+            .performScrollToIndex(5)
+            .performScrollToIndex(9)
+            .performScrollToIndex(14)
+
+        composeTestRule.waitForIdle()
+
+        composeTestRule.onNodeWithTag("ChallengesList")
+            .onChildren()
+            .filter(hasAnyChild(hasText("Challenge 16", substring = true)))
+            .onFirst().assertExists()
+
+        mockWebServer.shutdown()
+    }
+
+    @Test
+    fun shouldShowNextPageWhenNextPageFailedToLoadPreviouslyAndRetryWasTapped() {
+        val mockWebServer = MockWebServer()
+        mockWebServer.start(8080)
+        mockWebServer.enqueue(MockResponse().setBody(TestData.COMPLETED_CHALLENGES_WITH_NEXT_PAGE))
+        mockWebServer.enqueue(MockResponse().setResponseCode(404))
+        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(TestData.COMPLETED_CHALLENGES_PAGE_2))
+
+
+        baseUrl = mockWebServer.url("/").toString()
+        hiltRule.inject()
+
+        launch(MainActivity::class.java)
+
+        composeTestRule.mainClock.autoAdvance = true
+        composeTestRule.waitForIdle()
+
+        composeTestRule.onNodeWithTag("ChallengesList")
+            .performScrollToIndex(5)
+            .performScrollToIndex(9)
+            .performScrollToIndex(14)
+
+        composeTestRule.waitForIdle()
+
+        composeTestRule.onNodeWithTag("ChallengesList")
+            .onChildren()
+            .filter(hasTestTag("LoadMoreErrorItem"))
+            .onFirst().performClick()
+
+        composeTestRule.waitForIdle()
+
+        composeTestRule.onNodeWithTag("ChallengesList")
+            .onChildren()
+            .filter(hasAnyChild(hasText("Challenge 16", substring = true)))
+            .onFirst().assertExists()
+
+        mockWebServer.shutdown()
+    }
 }

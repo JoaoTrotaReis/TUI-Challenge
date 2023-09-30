@@ -85,19 +85,20 @@ class CompletedChallengesInteractorTests {
     fun `Given there are loaded challenges And next page is available When next page is requested Then emit a loading state followed by a loaded state with both pages of challenges`() = runTest {
         val dispatcher = StandardTestDispatcher(testScheduler)
         val now = Clock.System.now()
-        val initialState = CompletedChallengesState.Loaded(
-            CompletedChallenges(
-                currentPage = 1,
-                totalPages = 2,
-                challenges = listOf(
-                    CompletedChallenge(
-                        id = "id",
-                        name = "name",
-                        completedAt = now,
-                        languages = listOf()
-                    )
+        val initialChallenges = CompletedChallenges(
+            currentPage = 1,
+            totalPages = 2,
+            challenges = listOf(
+                CompletedChallenge(
+                    id = "id",
+                    name = "name",
+                    completedAt = now,
+                    languages = listOf()
                 )
             )
+        )
+        val initialState = CompletedChallengesState.Loaded(
+            initialChallenges
         )
 
         val nextPage = CompletedChallenges(
@@ -152,7 +153,7 @@ class CompletedChallengesInteractorTests {
         interactor.state.test {
             awaitItem()
             interactor.getMoreCompletedChallenges()
-            assertTrue(awaitItem() is CompletedChallengesState.Loading)
+            assertEquals(CompletedChallengesState.LoadingMore(initialChallenges), awaitItem())
             assertEquals(expectedResult, awaitItem())
         }
     }
@@ -161,19 +162,20 @@ class CompletedChallengesInteractorTests {
     fun `Given next page failed to load And next page is now available When next page is requested Then emit a loading state followed by a loaded state with both pages of challenges`() = runTest {
         val dispatcher = StandardTestDispatcher(testScheduler)
         val now = Clock.System.now()
-        val initialState = CompletedChallengesState.LoadMoreError(
-            CompletedChallenges(
-                currentPage = 1,
-                totalPages = 2,
-                challenges = listOf(
-                    CompletedChallenge(
-                        id = "id",
-                        name = "name",
-                        completedAt = now,
-                        languages = listOf()
-                    )
+        val initialChallenges = CompletedChallenges(
+            currentPage = 1,
+            totalPages = 2,
+            challenges = listOf(
+                CompletedChallenge(
+                    id = "id",
+                    name = "name",
+                    completedAt = now,
+                    languages = listOf()
                 )
             )
+        )
+        val initialState = CompletedChallengesState.LoadMoreError(
+            initialChallenges
         )
 
         val nextPage = CompletedChallenges(
@@ -228,7 +230,7 @@ class CompletedChallengesInteractorTests {
         interactor.state.test {
             awaitItem()
             interactor.getMoreCompletedChallenges()
-            assertTrue(awaitItem() is CompletedChallengesState.Loading)
+            assertEquals(CompletedChallengesState.LoadingMore(initialChallenges), awaitItem())
             assertEquals(expectedResult, awaitItem())
         }
     }
@@ -237,20 +239,19 @@ class CompletedChallengesInteractorTests {
     fun `Given there are loaded challenges And next page is available When next page is requested And fails to load Then emit a loading state followed by a load more error state`() = runTest {
         val dispatcher = StandardTestDispatcher(testScheduler)
         val now = Clock.System.now()
-        val initialState = CompletedChallengesState.Loaded(
-            CompletedChallenges(
-                currentPage = 1,
-                totalPages = 2,
-                challenges = listOf(
-                    CompletedChallenge(
-                        id = "id",
-                        name = "name",
-                        completedAt = now,
-                        languages = listOf()
-                    )
+        val initialChallenges = CompletedChallenges(
+            currentPage = 1,
+            totalPages = 2,
+            challenges = listOf(
+                CompletedChallenge(
+                    id = "id",
+                    name = "name",
+                    completedAt = now,
+                    languages = listOf()
                 )
             )
         )
+        val initialState = CompletedChallengesState.Loaded(initialChallenges)
 
         val expectedResult = CompletedChallengesState.LoadMoreError(
             CompletedChallenges(
@@ -285,7 +286,7 @@ class CompletedChallengesInteractorTests {
         interactor.state.test {
             awaitItem()
             interactor.getMoreCompletedChallenges()
-            assertTrue(awaitItem() is CompletedChallengesState.Loading)
+            assertEquals(CompletedChallengesState.LoadingMore(initialChallenges), awaitItem())
             assertEquals(expectedResult, awaitItem())
         }
     }
@@ -294,19 +295,20 @@ class CompletedChallengesInteractorTests {
     fun `Given next page failed to load When next page is requested And it fails to load Then emit a loading state followed by an load more error state`() = runTest {
         val dispatcher = StandardTestDispatcher(testScheduler)
         val now = Clock.System.now()
-        val initialState = CompletedChallengesState.LoadMoreError(
-            CompletedChallenges(
-                currentPage = 1,
-                totalPages = 2,
-                challenges = listOf(
-                    CompletedChallenge(
-                        id = "id",
-                        name = "name",
-                        completedAt = now,
-                        languages = listOf()
-                    )
+        val initialChallenges = CompletedChallenges(
+            currentPage = 1,
+            totalPages = 2,
+            challenges = listOf(
+                CompletedChallenge(
+                    id = "id",
+                    name = "name",
+                    completedAt = now,
+                    languages = listOf()
                 )
             )
+        )
+        val initialState = CompletedChallengesState.LoadMoreError(
+            initialChallenges
         )
 
         val expectedResult = CompletedChallengesState.LoadMoreError(
@@ -342,7 +344,7 @@ class CompletedChallengesInteractorTests {
         interactor.state.test {
             awaitItem()
             interactor.getMoreCompletedChallenges()
-            assertTrue(awaitItem() is CompletedChallengesState.Loading)
+            assertEquals(CompletedChallengesState.LoadingMore(initialChallenges), awaitItem())
             assertEquals(expectedResult, awaitItem())
         }
     }

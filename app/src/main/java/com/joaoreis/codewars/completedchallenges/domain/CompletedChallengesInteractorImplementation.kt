@@ -47,7 +47,7 @@ class CompletedChallengesInteractorImplementation(
     private suspend fun loadNextPage(currentChallenges: CompletedChallenges, currentPage: Int, currentUsername: String) {
         if (currentPage == currentChallenges.totalPages) return
 
-        _state.emit(CompletedChallengesState.Loading)
+        _state.emit(CompletedChallengesState.LoadingMore(currentChallenges))
         when(val result = completedChallengesGateway.getCompletedChallenges(currentUsername, currentPage + 1)) {
             is Result.Error -> _state.emit(CompletedChallengesState.LoadMoreError(currentChallenges))
             is Result.Success -> {

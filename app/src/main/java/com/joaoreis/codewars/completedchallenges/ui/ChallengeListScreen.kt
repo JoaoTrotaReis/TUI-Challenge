@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,16 +14,24 @@ import com.joaoreis.codewars.completedchallenges.presentation.CompletedChallenge
 import com.joaoreis.codewars.completedchallenges.presentation.CompletedChallengesViewState
 
 @Composable
-fun ChallengeListScreen(viewModel: CompletedChallengesViewModel = hiltViewModel(), navController: NavController) {
+fun ChallengeListScreen(
+    viewModel: CompletedChallengesViewModel = hiltViewModel(),
+    navController: NavController
+) {
     val state = viewModel.viewState.collectAsState().value
+
+
 
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        when(state) {
+        when (state) {
             is CompletedChallengesViewState.ChallengesLoaded -> {
                 ChallengeList(items = state.challenges,
-                onClickAction = { id -> navController.navigate("challenge/${id}")})
+                    loadMoreAction = {
+                        viewModel.loadMoreChallenges()
+                                     },
+                    onClickAction = { id -> navController.navigate("challenge/${id}") })
             }
             CompletedChallengesViewState.Error -> {
                 Column(

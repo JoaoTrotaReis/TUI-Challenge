@@ -28,7 +28,7 @@ class CompletedChallengesGatewayImplementation(
 
     private fun CompletedChallengeDTO.toDomainEntity(): CompletedChallenge = CompletedChallenge(
         id = this.id,
-        name = this.name,
+        name = this.name ?: "",
         completedAt = this.completedAt,
         languages = this.completedLanguages
     )

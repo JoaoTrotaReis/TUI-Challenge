@@ -14,7 +14,7 @@ object LoadMoreError: CompletedChallengeListItem()
 
 sealed class CompletedChallengesViewState {
     object Loading: CompletedChallengesViewState()
-    data class ChallengesLoaded(val challenges: List<CompletedChallengeUIModel>): CompletedChallengesViewState()
+    data class ChallengesLoaded(val challenges: List<CompletedChallengeListItem>, val canLoadMore: Boolean): CompletedChallengesViewState()
     object Error: CompletedChallengesViewState()
 }
 

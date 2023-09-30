@@ -13,8 +13,7 @@ data class CompletedChallengesListDTO(
 @kotlinx.serialization.Serializable
 data class CompletedChallengeDTO(
     val id: String,
-    val name: String,
-    val slug: String,
+    val name: String? = null,
     val completedAt: Instant,
     val completedLanguages: List<String>
 )

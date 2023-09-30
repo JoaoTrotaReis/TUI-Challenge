@@ -30,7 +30,6 @@ class CompletedChallengesGatewayTests {
                     CompletedChallengeDTO(
                         id = "id",
                         name = "name",
-                        slug = "slug",
                         completedAt = now,
                         completedLanguages = listOf("kotlin")
                     )
