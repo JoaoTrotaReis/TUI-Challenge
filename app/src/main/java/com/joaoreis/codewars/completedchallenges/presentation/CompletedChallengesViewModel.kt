@@ -2,8 +2,8 @@ package com.joaoreis.codewars.completedchallenges.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joaoreis.codewars.State
 import com.joaoreis.codewars.completedchallenges.domain.CompletedChallengesInteractor
+import com.joaoreis.codewars.completedchallenges.domain.CompletedChallengesState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -29,11 +29,10 @@ class CompletedChallengesViewModel @Inject constructor(
         viewModelScope.launch {
             completedChallengesInteractor.state.collect {
                 when (it) {
-                    is State.Error -> _viewState.emit(CompletedChallengesViewState.Error)
-                    is State.Idle -> {}
-                    is State.Loaded -> {
+                    is CompletedChallengesState.FirstPageLoadError -> _viewState.emit(CompletedChallengesViewState.Error)
+                    is CompletedChallengesState.Loaded -> {
                         _viewState.emit(CompletedChallengesViewState.ChallengesLoaded(
-                            it.data.challenges.map { challenge ->
+                            it.completedChallenges.challenges.map { challenge ->
                                 CompletedChallengeUIModel(
                                     id = challenge.id,
                                     name = challenge.name,
@@ -43,7 +42,8 @@ class CompletedChallengesViewModel @Inject constructor(
                             }
                         ))
                     }
-                    is State.Loading -> _viewState.emit(CompletedChallengesViewState.Loading)
+                    is CompletedChallengesState.Loading -> _viewState.emit(CompletedChallengesViewState.Loading)
+                    else -> {}
                 }
             }
         }

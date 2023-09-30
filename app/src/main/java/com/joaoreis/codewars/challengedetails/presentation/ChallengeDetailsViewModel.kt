@@ -2,13 +2,11 @@ package com.joaoreis.codewars.challengedetails.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.joaoreis.codewars.State
+import com.joaoreis.codewars.challengedetails.domain.ChallengeDetailsState
 import com.joaoreis.codewars.challengedetails.domain.ChallengeDetailsInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,21 +22,21 @@ class ChallengeDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             challengeDetailsInteractor.state.collect {
                 when(it) {
-                    is State.Error -> _viewState.emit(ChallengeDetailsViewState.Error)
-                    is State.Idle -> {}
-                    is State.Loaded -> {
+                    is ChallengeDetailsState.Error -> _viewState.emit(ChallengeDetailsViewState.Error)
+                    is ChallengeDetailsState.Idle -> {}
+                    is ChallengeDetailsState.Loaded -> {
                         _viewState.emit(
                             ChallengeDetailsViewState.ChallengeDetailsLoaded(
                                 ChallengeDetailsUIModel(
-                                    name = it.data.name,
-                                    description = it.data.description,
-                                    tags = it.data.tags,
-                                    languages = it.data.languages
+                                    name = it.challengeDetails.name,
+                                    description = it.challengeDetails.description,
+                                    tags = it.challengeDetails.tags,
+                                    languages = it.challengeDetails.languages
                                 )
                             )
                         )
                     }
-                    is State.Loading -> _viewState.emit(ChallengeDetailsViewState.Loading)
+                    is ChallengeDetailsState.Loading -> _viewState.emit(ChallengeDetailsViewState.Loading)
                 }
             }
         }

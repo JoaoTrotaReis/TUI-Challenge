@@ -4,6 +4,7 @@ import app.cash.turbine.test
 import com.joaoreis.codewars.challengedetails.domain.ChallengeDetails
 import com.joaoreis.codewars.challengedetails.domain.ChallengeDetailsGateway
 import com.joaoreis.codewars.challengedetails.domain.ChallengeDetailsInteractorImplementation
+import com.joaoreis.codewars.challengedetails.domain.ChallengeDetailsState
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -24,7 +25,7 @@ class ChallengeDetailsInteractorTests {
             tags = listOf("tag"),
             languages = listOf("kotlin")
         )
-        val expectedResult = State.Loaded(challengeDetails)
+        val expectedResult = ChallengeDetailsState.Loaded(challengeDetails)
         val gateway = mockk<ChallengeDetailsGateway>().also {
             coEvery { it.getChallengeDetails(any()) } returns Result.Success(challengeDetails)
         }
@@ -38,7 +39,7 @@ class ChallengeDetailsInteractorTests {
         interactor.state.test {
             awaitItem()
             interactor.getChallengeDetails("id")
-            assertTrue(awaitItem() is State.Loading)
+            assertTrue(awaitItem() is ChallengeDetailsState.Loading)
             assertEquals(expectedResult, awaitItem())
         }
     }
@@ -59,8 +60,8 @@ class ChallengeDetailsInteractorTests {
         interactor.state.test {
             awaitItem()
             interactor.getChallengeDetails("id")
-            assertTrue(awaitItem() is State.Loading)
-            assertTrue(awaitItem() is State.Error)
+            assertTrue(awaitItem() is ChallengeDetailsState.Loading)
+            assertTrue(awaitItem() is ChallengeDetailsState.Error)
         }
     }
 }

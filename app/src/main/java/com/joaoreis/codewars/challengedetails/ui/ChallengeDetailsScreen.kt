@@ -63,9 +63,3 @@ fun ChallengeDetailsScreen(
         }
     }
 }
-
-@Composable
-@Preview
-fun ChallengeDetailsScreen_Preview() {
-
-}

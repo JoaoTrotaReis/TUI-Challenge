@@ -18,6 +18,7 @@ class CompletedChallengesGatewayImplementation(
                 val response = codewarsAPI.getCompletedChallenges(userName, page)
                 Result.Success(CompletedChallenges(
                     currentPage = page,
+                    totalPages = response.totalPages,
                     challenges = response.data.map { it.toDomainEntity() }
                 ))
             } catch (e: Exception) {

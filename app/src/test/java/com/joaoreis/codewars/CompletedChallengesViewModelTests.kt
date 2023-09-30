@@ -7,6 +7,7 @@ import com.joaoreis.codewars.completedchallenges.presentation.CompletedChallenge
 import com.joaoreis.codewars.completedchallenges.domain.CompletedChallenge
 import com.joaoreis.codewars.completedchallenges.domain.CompletedChallenges
 import com.joaoreis.codewars.completedchallenges.domain.CompletedChallengesInteractor
+import com.joaoreis.codewars.completedchallenges.domain.CompletedChallengesState
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
@@ -38,7 +39,7 @@ class CompletedChallengesViewModelTests {
     @Test
     fun `When completed challenges are loading Then emit a loading view state`() = runTest {
         val interactor = mockk<CompletedChallengesInteractor>(relaxed = true).also {
-            coEvery { it.state } returns MutableStateFlow(State.Loading())
+            coEvery { it.state } returns MutableStateFlow(CompletedChallengesState.Loading)
         }
 
         val viewModel = CompletedChallengesViewModel(
@@ -53,7 +54,7 @@ class CompletedChallengesViewModelTests {
     @Test
     fun `When there is an error getting completed challenges Then emit an error view state`() = runTest {
         val interactor = mockk<CompletedChallengesInteractor>(relaxed = true).also {
-            coEvery { it.state } returns MutableStateFlow(State.Error())
+            coEvery { it.state } returns MutableStateFlow(CompletedChallengesState.FirstPageLoadError)
         }
 
         val viewModel = CompletedChallengesViewModel(
@@ -70,6 +71,7 @@ class CompletedChallengesViewModelTests {
     fun `When the completed challenges were loaded Then emit a loaded view state`() = runTest {
         val challenges = CompletedChallenges(
             currentPage = 1,
+            totalPages = 1,
             challenges = listOf(
                 CompletedChallenge(
                     id = "id",
@@ -92,7 +94,7 @@ class CompletedChallengesViewModelTests {
         )
 
         val interactor = mockk<CompletedChallengesInteractor>(relaxed = true).also {
-            coEvery { it.state } returns MutableStateFlow(State.Loaded(challenges))
+            coEvery { it.state } returns MutableStateFlow(CompletedChallengesState.Loaded(challenges))
         }
 
         val viewModel = CompletedChallengesViewModel(

@@ -3,6 +3,7 @@ package com.joaoreis.codewars
 import app.cash.turbine.test
 import com.joaoreis.codewars.challengedetails.domain.ChallengeDetails
 import com.joaoreis.codewars.challengedetails.domain.ChallengeDetailsInteractor
+import com.joaoreis.codewars.challengedetails.domain.ChallengeDetailsState
 import com.joaoreis.codewars.challengedetails.presentation.ChallengeDetailsUIModel
 import com.joaoreis.codewars.challengedetails.presentation.ChallengeDetailsViewModel
 import com.joaoreis.codewars.challengedetails.presentation.ChallengeDetailsViewState
@@ -37,7 +38,7 @@ class ChallengeDetailsViewModelTests {
     @Test
     fun `When challenge details are loading Then emit a loading view state`() = runTest {
         val interactor = mockk<ChallengeDetailsInteractor>().also {
-            coEvery { it.state } returns MutableStateFlow(State.Loading())
+            coEvery { it.state } returns MutableStateFlow(ChallengeDetailsState.Loading)
         }
 
         val viewModel = ChallengeDetailsViewModel(challengeDetailsInteractor = interactor)
@@ -59,7 +60,8 @@ class ChallengeDetailsViewModelTests {
         )
 
         val interactor = mockk<ChallengeDetailsInteractor>().also {
-            coEvery { it.state } returns MutableStateFlow(State.Loaded(
+            coEvery { it.state } returns MutableStateFlow(
+                ChallengeDetailsState.Loaded(
                 ChallengeDetails(
                     name = "name",
                     description = "description",
@@ -80,7 +82,7 @@ class ChallengeDetailsViewModelTests {
     @Test
     fun `When there is an error loading challenge details Then emit an error view state`() = runTest {
         val interactor = mockk<ChallengeDetailsInteractor>().also {
-            coEvery { it.state } returns MutableStateFlow(State.Error())
+            coEvery { it.state } returns MutableStateFlow(ChallengeDetailsState.Error)
         }
 
         val viewModel = ChallengeDetailsViewModel(challengeDetailsInteractor = interactor)

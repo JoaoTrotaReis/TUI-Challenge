@@ -40,6 +40,7 @@ class CompletedChallengesGatewayTests {
             val expectedResult = Result.Success(
                 CompletedChallenges(
                     currentPage = 1,
+                    totalPages = 1,
                     challenges = listOf(
                         CompletedChallenge(
                             id = "id",
