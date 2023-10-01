@@ -20,7 +20,7 @@ object CompletedChallengesDataModule {
         codewarsAPI: CodewarsAPI,
         @IoDispatcher dispatcher: CoroutineDispatcher
     ): CompletedChallengesGateway =
-        CompletedChallengesGatewayImplementation(codewarsAPI, dispatcher)
+        HttpCompletedChallengesGateway(codewarsAPI, dispatcher)
 
     @Singleton
     @Provides

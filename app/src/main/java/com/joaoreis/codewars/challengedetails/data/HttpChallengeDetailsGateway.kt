@@ -7,7 +7,7 @@ import com.joaoreis.codewars.challengedetails.domain.ChallengeDetailsGateway
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
-class ChallengeDetailsGatewayImplementation(
+class HttpChallengeDetailsGateway(
     private val codewarsAPI: CodewarsAPI,
     private val dispatcher: CoroutineDispatcher
 ) : ChallengeDetailsGateway {

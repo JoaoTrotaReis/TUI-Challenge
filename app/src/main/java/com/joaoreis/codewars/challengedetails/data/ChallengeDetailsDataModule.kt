@@ -17,7 +17,7 @@ object ChallengeDetailsDataModule {
         codewarsAPI: CodewarsAPI,
         @IoDispatcher dispatcher: CoroutineDispatcher
     ): ChallengeDetailsGateway {
-        return ChallengeDetailsGatewayImplementation(
+        return HttpChallengeDetailsGateway(
             codewarsAPI = codewarsAPI,
             dispatcher = dispatcher
         )

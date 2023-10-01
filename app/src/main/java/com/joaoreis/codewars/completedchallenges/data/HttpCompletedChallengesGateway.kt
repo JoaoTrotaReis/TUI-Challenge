@@ -8,7 +8,7 @@ import com.joaoreis.codewars.completedchallenges.domain.CompletedChallengesGatew
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
-class CompletedChallengesGatewayImplementation(
+class HttpCompletedChallengesGateway(
     val codewarsAPI: CodewarsAPI,
     val dispatcher: CoroutineDispatcher
 ) : CompletedChallengesGateway {

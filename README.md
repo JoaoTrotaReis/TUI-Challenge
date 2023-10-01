@@ -19,7 +19,11 @@ Below is a diagram of an overview of the architecture
 ![Architecture Diagram](./architecture_codewars.png)
 
 # Testing strategy
-I opted to implement two types of tests, Unit and Component (more details: https://martinfowler.com/bliki/ComponentTest.html).
+I opted to implement three types of tests, Unit, Integration and Component (more details: https://martinfowler.com/bliki/ComponentTest.html).
+The unit tests were implemented to test the domain and presentation logic and the strategy was to test the use cases in isolation to ensure the business logic is correct. ViewModels were also tested using unit tests.
+The Integration tests were implemented to test the Gateways, and the main objective is to test that the gateways call the correct endpoints and return the correct data for the given JSON responses.
+Finally, the component tests were implemented to ensure that the app works as expected as a whole. I opted to use MockWebServer in order to have more control.
+
 During the development I used TDD which guided the way I implemented most things and had the side effect of producing a lot of unit tests. I started by the domain layer and went outwards.
 The component tests were implemented later to validate the acceptance criteria of the requirements asked.
 
